@@ -10,6 +10,10 @@ interface IState {
 
 // still trying to figure this out
 
+// almost there?
+
+// still confused ish 
+
 class App extends React.Component<{}, IState> {
   public state = {
     message: "Hello"
