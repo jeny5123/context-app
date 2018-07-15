@@ -12,9 +12,7 @@ class App extends React.Component<{}, IState> {
   public state = {
     message: "Hello"
   }
-
-  //hello there
-
+  
   public render() {
     return (
       <div className="App">
