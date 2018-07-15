@@ -13,6 +13,7 @@ class App extends React.Component<{}, IState> {
     message: "Hello"
   }
 
+  // random message
   public render() {
     return (
       <div className="App">
