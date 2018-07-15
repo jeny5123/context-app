@@ -12,8 +12,7 @@ class App extends React.Component<{}, IState> {
   public state = {
     message: "Hello"
   }
-
-  // random message
+  
   public render() {
     return (
       <div className="App">
