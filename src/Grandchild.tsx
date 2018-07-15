@@ -20,11 +20,9 @@ class Grandchild extends React.Component {
     (event: React.FormEvent<HTMLButtonElement>) => {
       event.preventDefault();
       const { current: input } = this.ref;
-
       if (!input) {
         return;
       }
-
       updateMessage(input.value);
     };
 }
