@@ -46,7 +46,7 @@ class EditForm extends React.Component<IProps, IState> {
                                 onClick={this.handleClick(updateUser)}
                             >
                                 Submit
-                        </button>
+                            </button>
                         )}
                     </Context.Consumer>
                 </div>
@@ -54,8 +54,15 @@ class EditForm extends React.Component<IProps, IState> {
         );
     }
 
-    private handleChange = (event: any) => {
-        this.setState({ [event.target.name]: event.target.value } as Pick<IState, keyof IState>);
+    /* private handleChange = (key: keyof IState) => (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        this.setState(state => ({
+            ...state,
+            [key]: event.currentTarget.value,
+        }));
+    } */
+
+    private handleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        this.setState({ [event.currentTarget.name]: event.currentTarget.value } as Pick<IState, keyof IState>);
     }
 
     private handleClick = (updateUser: (userId: number, data: IUser) => void) =>
