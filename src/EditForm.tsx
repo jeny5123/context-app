@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { IUser } from './user';
+import Context from './UserContext';
+
 
 interface IProps extends RouteComponentProps<{}> {
     user: IUser;
-    updateUser: any;
 }
 
 interface IState {
@@ -40,11 +41,15 @@ class EditForm extends React.Component<IProps, IState> {
                     <p>Description:</p>
                     <textarea name="description" value={this.state.description} onChange={this.handleChange} />
                     <br />
-                    <button
-                        onClick={this.handleClick}
-                    >
-                        Submit
-                    </button>
+                    <Context.Consumer>
+                        {({updateUser}) => (
+                        <button
+                            onClick={this.handleClick(updateUser)}
+                        >
+                            Submit
+                        </button>
+                        )}
+                    </Context.Consumer>
                 </div>
             </div >
         );
@@ -54,10 +59,13 @@ class EditForm extends React.Component<IProps, IState> {
         this.setState({ [event.target.name]: event.target.value } as Pick<IState, keyof IState>);
     }
 
-    private handleClick = () => {
+    private handleClick = (updateUser: (userId: number, data: IUser) => void) => 
         //  this.props.updateUser(this.props.user.userId, { name: this.state.name, age: this.state.age, description: this.state.description, occupation: this.state.occupation, userId: this.props.user.userId });
-        this.props.updateUser(this.props.user.userId, { ...this.state, userId: this.props.user.userId })
-    }
+        (event: React.FormEvent<HTMLButtonElement>) => {
+            event.preventDefault();
+            updateUser(this.props.user.userId, { ...this.state, userId: this.props.user.userId });
+        }
+    
 }
 
 export default EditForm;

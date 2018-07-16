@@ -5,7 +5,6 @@ import { IUser } from './user'
 
 interface IProps extends RouteComponentProps<{}> {
     users: {};
-    updateUser: any;
 }
 
 const ListDisplay = (props: { users: {} }) => {
@@ -41,7 +40,6 @@ class Users extends React.Component<IProps, {}> {
                             <EditForm
                                 key={`USER_ROUTE_${props.match.params.userId}`}
                                 {...props}
-                                updateUser={this.props.updateUser}
                                 user={values.find((user: IUser) => {
                                     return user.userId.toString() === props.match.params.userId;
                                 })!}

@@ -1,12 +1,10 @@
 import * as React from 'react';
 import {Link, Route, Switch} from 'react-router-dom';
-import {IUser} from './user'
-/* import Child from './Child';
-import Context from './MessageContext';
-import Sibling from './Sibling'; */
+import {IUser} from './user';
 
 import About from './About';
 import Home from './Home';
+import Context from './UserContext';
 import Users from './Users';
 
 interface IState {
@@ -38,34 +36,23 @@ class App extends React.Component<{}, IState> {
   public render() {
     return (
       <div>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/users">Users</Link>
-        </nav>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route
-            path="/users"
-            render={props => <Users {...props} users={this.state.userArr} updateUser={this.updateUser} />} />
-        </Switch>
-      </div>
-    );
-  }
-}
-  /* public render() {
-    return (
-      <div className="App">
-        <Context.Provider value={{ message: this.state.message, updateMessage: this.updateMessage }}>
-          <Sibling />
-          <Child />
+        <Context.Provider value={{updateUser: this.updateUser}}>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/users">Users</Link>
+          </nav>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route
+              path="/users"
+              render={props => <Users {...props} users={this.state.userArr} /* updateUser={this.updateUser} */ />} />
+          </Switch>
         </Context.Provider>
       </div>
     );
   }
-
-  private updateMessage = (nextMessage: string) => this.setState(state => ({...state, message: nextMessage}));
 }
- */
+
 export default App;
