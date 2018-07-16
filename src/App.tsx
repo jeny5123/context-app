@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Link, Route, Switch} from 'react-router-dom';
-import {IUser} from './user';
+import { Link, Route, Switch } from 'react-router-dom';
+import { IUser } from './user';
 
 import About from './About';
 import Home from './Home';
@@ -8,12 +8,12 @@ import Context from './UserContext';
 import Users from './Users';
 
 interface IState {
-  userArr: {};
+  userDict: Record<number, IUser>;
 }
 
 class App extends React.Component<{}, IState> {
   public state: IState = {
-    userArr: {
+    userDict: {
       0: { name: 'Ernesto', age: '56', occupation: 'retired gardener', description: 'bad at gardening', userId: 0 },
       1: { name: 'Wallace', age: '36', occupation: 'dogwalker', description: 'walks cats in his free time', userId: 1 },
       2: { name: 'Fabio', age: '23', occupation: 'student', description: 'trying to pay off debt and drink boba', userId: 2 }
@@ -21,12 +21,11 @@ class App extends React.Component<{}, IState> {
   }
 
   public updateUser = (userId: number, data: IUser) => {
-    // find a way to update just the user object 
     this.setState(state => {
       return {
         ...state,
-        userArr: {
-          ...state.userArr,
+        userDict: {
+          ...state.userDict,
           [userId]: data
         }
       };
@@ -36,7 +35,7 @@ class App extends React.Component<{}, IState> {
   public render() {
     return (
       <div>
-        <Context.Provider value={{updateUser: this.updateUser}}>
+        <Context.Provider value={{ updateUser: this.updateUser }}>
           <nav>
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
@@ -47,7 +46,7 @@ class App extends React.Component<{}, IState> {
             <Route exact path="/about" component={About} />
             <Route
               path="/users"
-              render={props => <Users {...props} users={this.state.userArr} /* updateUser={this.updateUser} */ />} />
+              render={props => <Users {...props} users={this.state.userDict} />} />
           </Switch>
         </Context.Provider>
       </div>

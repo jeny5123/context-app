@@ -19,7 +19,6 @@ class EditForm extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            // assume one user is passed to page
             age: props.user.age,
             description: props.user.description,
             name: props.user.name,
@@ -42,11 +41,11 @@ class EditForm extends React.Component<IProps, IState> {
                     <textarea name="description" value={this.state.description} onChange={this.handleChange} />
                     <br />
                     <Context.Consumer>
-                        {({updateUser}) => (
-                        <button
-                            onClick={this.handleClick(updateUser)}
-                        >
-                            Submit
+                        {({ updateUser }) => (
+                            <button
+                                onClick={this.handleClick(updateUser)}
+                            >
+                                Submit
                         </button>
                         )}
                     </Context.Consumer>
@@ -59,13 +58,12 @@ class EditForm extends React.Component<IProps, IState> {
         this.setState({ [event.target.name]: event.target.value } as Pick<IState, keyof IState>);
     }
 
-    private handleClick = (updateUser: (userId: number, data: IUser) => void) => 
-        //  this.props.updateUser(this.props.user.userId, { name: this.state.name, age: this.state.age, description: this.state.description, occupation: this.state.occupation, userId: this.props.user.userId });
+    private handleClick = (updateUser: (userId: number, data: IUser) => void) =>
         (event: React.FormEvent<HTMLButtonElement>) => {
             event.preventDefault();
             updateUser(this.props.user.userId, { ...this.state, userId: this.props.user.userId });
         }
-    
+
 }
 
 export default EditForm;

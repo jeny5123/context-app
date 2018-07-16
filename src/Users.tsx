@@ -4,10 +4,10 @@ import EditForm from './EditForm'
 import { IUser } from './user'
 
 interface IProps extends RouteComponentProps<{}> {
-    users: {};
+    users: Record<number, IUser>;
 }
 
-const ListDisplay = (props: { users: {} }) => {
+const ListDisplay = (props: { users: Record<number, IUser> }) => {
     const values = Object.keys(props.users).map(key => props.users[key]);
     return (
         <div>
@@ -28,7 +28,6 @@ const ListDisplay = (props: { users: {} }) => {
 
 class Users extends React.Component<IProps, {}> {
     public render() {
-        const values = Object.keys(this.props.users).map(key => this.props.users[key]);
         return (
             <div>
                 <h1>Users</h1>
@@ -40,9 +39,7 @@ class Users extends React.Component<IProps, {}> {
                             <EditForm
                                 key={`USER_ROUTE_${props.match.params.userId}`}
                                 {...props}
-                                user={values.find((user: IUser) => {
-                                    return user.userId.toString() === props.match.params.userId;
-                                })!}
+                                user={this.props.users[props.match.params.userId]}
                             />
                         );
                     }}
