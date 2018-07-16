@@ -54,13 +54,6 @@ class EditForm extends React.Component<IProps, IState> {
         );
     }
 
-    /* private handleChange = (key: keyof IState) => (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        this.setState(state => ({
-            ...state,
-            [key]: event.currentTarget.value,
-        }));
-    } */
-
     private handleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState({ [event.currentTarget.name]: event.currentTarget.value } as Pick<IState, keyof IState>);
     }
